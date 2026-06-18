@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realme | Sorteador de Números Realme</title>
+    <meta name="description"
+        content="El sorteador de números más premium y futurista. Inspirado en la identidad de Realme y protagonizado por Realme. ¡Sortea números con efectos increíbles!">
+
+    <!-- Google Fonts: Outfit (Brand, UI) & Orbitron (Cyberpunk/Digital Numbers) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Favicon inline SVG -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+</head>
+
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor-dot" id="cursor-dot"></div>
+    <div class="custom-cursor-outline" id="cursor-outline"></div>
+
+    <!-- Parallax Background Image -->
+    <div class="parallax-bg-wrapper">
+        <div class="parallax-bg" id="parallax-bg"></div>
+        <div class="glow-overlay"></div>
+    </div>
+
+    <!-- Interactive Canvas Elements -->
+    <canvas id="particles-canvas" class="interaction-canvas"></canvas>
+    <canvas id="victory-canvas" class="interaction-canvas"></canvas>
+
+    <div class="scroll-container">
+        <!-- Section 1: Hero / Welcome Screen -->
+        <header class="hero-section" id="hero">
+            <div class="hero-content">
+                <div class="brand-badge-wrapper animate-fade-in">
+                    <span class="brand-badge">realme</span>
+                    <span class="product-badge">EDITION</span>
+                </div>
+
+                <h1 class="hero-title animate-slide-up">
+                    <span class="yellow-text">REALME</span> SORTEO
+                </h1>
+
+                <p class="hero-subtitle animate-slide-up-delayed">
+                    <!-- Experimenta el sorteador de números más rápido, disruptivo y asombroso. -->
+                </p>
+
+                <div class="scroll-indicator animate-bounce" id="scroll-hint">
+                    <span class="scroll-text">Desliza o haz clic para ingresar</span>
+                    <div class="scroll-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="#ffc800" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Section 2: Main Sorteador App -->
+        <main class="draw-section" id="draw-app">
+            <div class="container">
+                <!-- Avatar Column -->
+                <div class="avatar-column" id="avatar-column">
+                    <div class="avatar-wrapper" id="avatar-wrapper">
+                        <div class="avatar-glow-ring"></div>
+                        <img src="avatar.png" alt="Realmeow Avatar" class="avatar-img" id="avatar-img"
+                            draggable="false">
+                        <div class="avatar-shadow"></div>
+                        <div class="avatar-label">
+                            <span class="avatar-label-dot"></span>
+                            REALME
+                        </div>
+                    </div>
+                </div>
+                <div class="draw-card card-glow" id="main-card">
+                    <!-- Audio Control Switch -->
+                    <button class="audio-toggle-btn" id="audio-toggle" title="Activar/Desactivar sonido"
+                        aria-label="Toggle Audio">
+                        <svg class="audio-icon audio-on" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="currentColor" stroke-width="2"
+                                stroke-linejoin="round" />
+                            <path
+                                d="M15.54 8.46002C16.4774 9.39763 17.0041 10.6692 17.0041 12C17.0041 13.3308 16.4774 14.6024 15.54 15.54M19.07 4.93005C20.9447 6.80529 21.9979 9.34834 21.9979 12C21.9979 14.6517 20.9447 17.1948 19.07 19.07"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <svg class="audio-icon audio-off hidden" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="currentColor" stroke-width="2"
+                                stroke-linejoin="round" />
+                            <path d="M23 9L17 15M17 9L23 15" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </button>
+
+                    <!-- Card Header -->
+                    <div class="card-header">
+                        <h2>Sorteador de Números</h2>
+                        <p>Ingresa el rango numérico y deja que Realme decida el ganador</p>
+                    </div>
+
+                    <!-- Config Grid -->
+                    <div class="config-grid">
+                        <div class="input-group">
+                            <label for="min-val">Número Inicial</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="min-val" value="1" min="0" max="999999">
+                                <span class="input-glow-bar"></span>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label for="max-val">Número Final</label>
+                            <div class="input-wrapper">
+                                <input type="number" id="max-val" value="100" min="1" max="999999">
+                                <span class="input-glow-bar"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Display Winner Area -->
+                    <div class="display-container" id="winner-display-container">
+                        <div class="display-glow"></div>
+                        <div class="display-counter" id="winner-display">000</div>
+                        <div class="display-label" id="display-status">REALME LISTO</div>
+                    </div>
+
+                    <!-- Error Alert -->
+                    <div class="error-banner hidden" id="error-message">
+                        ¡El número final debe ser mayor que el inicial!
+                    </div>
+
+                    <!-- Control Button -->
+                    <button class="draw-btn" id="draw-btn">
+                        <span class="btn-background"></span>
+                        <span class="btn-border"></span>
+                        <span class="btn-text">SORTEAR GANADOR</span>
+                        <span class="btn-particles"></span>
+                    </button>
+                </div>
+
+                <!-- Recent Winners Panel -->
+                <section class="history-panel card-glow" id="history-container">
+                    <h3>Ganadores Anteriores</h3>
+                    <div class="history-list-wrapper">
+                        <ul class="history-list" id="history-list">
+                            <li class="history-empty">Aún no hay ganadores en esta sesión</li>
+                        </ul>
+                    </div>
+                    <button class="clear-history-btn" id="clear-history">Limpiar Historial</button>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer-section">
+            <p>© 2026 Realme. Todo los derechos reservados. Desarrollado por Eligio Ayala.</p>
+        </footer>
+    </div>
+
+    <!-- App Script -->
+    <script src="app.js"></script>
+</body>
+
+</html>
